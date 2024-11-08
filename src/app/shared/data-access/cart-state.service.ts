@@ -30,11 +30,14 @@ export class CartStateService {
         sources: [this.loadProducts$],
         actionSources: {
             add: (state, action$: Observable<ProductItemCart>) =>
-                action$.pipe(map((product) => this.add(state, product)))
+                action$.pipe(map((product) => this.add(state, product))),
+            remove: (state, action$: Observable<number>) =>
+                action$.pipe(map((id) => this.remove(state, id))),
+            update: (state, action$: Observable<ProductItemCart>) => action$.pipe(map(product => this.update(state, product)))
         },
         effects: (state) => ({
             load: () => {
-                if(state().loaded){
+                if (state().loaded) {
                     this._storageService.saveProducts(state().products);
                 }
             }
@@ -49,11 +52,29 @@ export class CartStateService {
             return {
                 products: [...state().products, { ...product, quantity: 1 }]
             }
-        }        
+        }
 
         isInCart.quantity += 1;
-        return{
+        return {
             product: [...state().products]
         }
+    }
+
+    private remove(state: Signal<State>, id: number) {
+        return {
+            products: state().products.filter((product) => product.product.id !== id)
+        }
+    }
+
+    private update(state: Signal<State>, product: ProductItemCart) {
+        const products = state().products.map((productInCart) => {
+            if (productInCart.product.id === product.product.id) {
+                return { ...productInCart, quantity: product.quantity }
+            }
+
+            return productInCart
+        })
+
+        return { products }
     }
 }
