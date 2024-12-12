@@ -1,0 +1,88 @@
+{
+  "hash": "199b4efe",
+  "configHash": "db9f3b96",
+  "lockfileHash": "da1dba03",
+  "browserHash": "37110bd8",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "b0cba6bd",
+      "needsInterop": false
+    },
+    "@angular/common/http": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
+      "file": "@angular_common_http.js",
+      "fileHash": "eecb4ba0",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "c169f434",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "59a8e4ac",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "6058c586",
+      "needsInterop": false
+    },
+    "ngxtension/signal-slice": {
+      "src": "../../../../../node_modules/ngxtension/fesm2022/ngxtension-signal-slice.mjs",
+      "file": "ngxtension_signal-slice.js",
+      "fileHash": "fa294939",
+      "needsInterop": false
+    },
+    "rxjs": {
+      "src": "../../../../../node_modules/rxjs/dist/esm5/index.js",
+      "file": "rxjs.js",
+      "fileHash": "965d5df9",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../../../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "e4cf682c",
+      "needsInterop": false
+    },
+    "sweetalert2": {
+      "src": "../../../../../node_modules/sweetalert2/dist/sweetalert2.esm.all.js",
+      "file": "sweetalert2.js",
+      "fileHash": "b3ea9606",
+      "needsInterop": false
+    },
+    "jwt-decode": {
+      "src": "../../../../../node_modules/jwt-decode/build/esm/index.js",
+      "file": "jwt-decode.js",
+      "fileHash": "c017e1ab",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-GA4QSMM7": {
+      "file": "chunk-GA4QSMM7.js"
+    },
+    "chunk-JARSKTRZ": {
+      "file": "chunk-JARSKTRZ.js"
+    },
+    "chunk-YOQTG4XD": {
+      "file": "chunk-YOQTG4XD.js"
+    },
+    "chunk-IHMR5YYM": {
+      "file": "chunk-IHMR5YYM.js"
+    },
+    "chunk-FDESMX7I": {
+      "file": "chunk-FDESMX7I.js"
+    },
+    "chunk-4ULMLRGT": {
+      "file": "chunk-4ULMLRGT.js"
+    }
+  }
+}
