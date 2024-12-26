@@ -178,9 +178,7 @@ app.delete("/delete/:product_id", async (req, res) => {
 
 app.post("/user/cart", authenticateToken, async (req, res) => {
   const userId = req.userId
-  const { productId } = req.body
-  console.log(userId);
-  
+  const { productId } = req.body 
 
   try {
     const product = await Product.findById(productId)
@@ -188,16 +186,56 @@ app.post("/user/cart", authenticateToken, async (req, res) => {
       return res.status(404).json({ message: "Product not found" })
     }
 
-    const user = await User.findByIdAndUpdate(
-      userId,
-      { $addToSet: { cart: product._id } },
+    const user = await User.findOneAndUpdate(
+      {
+        _id: userId,
+        "cart.product": product._id, // Busca si el producto ya existe en el carrito
+      },
+      {
+        $inc: { "cart.$.quantity": 1 }, // Actualiza la cantidad si ya existe
+      },
       { new: true }
-    ).populate("cart")
+    ).populate("cart");
+
+    // Si no existe el producto, lo añades
+    if (!user) {
+      await User.findByIdAndUpdate(
+        userId,
+        {
+          $push: {
+            cart: {
+              product: {
+                _id: product._id,
+                image: product.image,
+                title: product.title,
+                price: product.price
+              },
+              quantity: 1,
+            }
+          }, // Agrega un nuevo producto al carrito
+        },
+        { new: true }
+      ).populate("cart");
+    }    
 
     if (!user) {
       return res.status(404).json({ message: "User not found" })
     }
 
+    return res.status(200).json(user.cart)
+  } catch (err) {
+    return res.status(500).json({ message: err.message })
+  }
+})
+
+app.get("/user/cart", authenticateToken, async (req, res) => {
+  try {
+    const userId = req.userId
+    const user = await User.findById(userId).populate("cart")
+    if (!user) {
+      return res.status(404).json({ message: "User not found" })
+    }
+    
     return res.status(200).json(user.cart)
   } catch (err) {
     return res.status(500).json({ message: err.message })

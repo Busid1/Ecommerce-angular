@@ -23,7 +23,9 @@ export class CartStateService {
 
     loadProducts$ = this._storageService
         .loadProducts()
-        .pipe(map((products) => ({ products, loaded: true })));
+        .pipe(map((products) => ({ 
+            products, loaded: true 
+        })));
 
     state = signalSlice({
         initialState: this.initialState,
@@ -74,7 +76,7 @@ export class CartStateService {
 
     private update(state: Signal<State>, product: ProductItemCart) {
         const products = state().products.map((productInCart) => {
-            if (productInCart.product._id === product.product._id) {
+            if (productInCart.product._id === product.product._id) {                
                 return { ...productInCart, quantity: product.quantity }
             }
 

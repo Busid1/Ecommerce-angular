@@ -35,7 +35,6 @@ export default class CreateProductComponent {
 
   async submitForm(event: Event) {
     event.preventDefault();
-    console.log(this.formData.category);
     
     try {
       const response = await axios.post('http://localhost:2000/createProduct', this.formData, {

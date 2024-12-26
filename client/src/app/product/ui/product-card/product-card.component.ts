@@ -6,7 +6,6 @@ import { CurrencyPipe } from '@angular/common';
 import UpdateProductComponent from '../../../admin/crud/update-product/update-product.component';
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-card',

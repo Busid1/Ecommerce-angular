@@ -1,18 +1,35 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { from, Observable, of } from "rxjs";
 import { ProductItemCart } from "../interfaces/product.interface";
+import axios from "axios";
 
 @Injectable({
     providedIn: "root"
 })
 
 export class StorageService {
-    loadProducts(): Observable<ProductItemCart[]> {
-        const rawProducts = localStorage.getItem("products");
-        return of(rawProducts ? JSON.parse(rawProducts) : [])
+    async userCartCount() {
+        const token = localStorage.getItem('authToken');
+        await axios.get(`http://localhost:2000/user/cart`, { headers: { Authorization: `Bearer ${token}` } })
     }
 
-    saveProducts(products: ProductItemCart[]): void{
+    loadProducts(): Observable<ProductItemCart[]> {
+        const token = localStorage.getItem('authToken');
+        if (!token) {
+            return of([]);
+        }
+
+        return from(
+            axios.get(`http://localhost:2000/user/cart`, {
+                headers: { Authorization: `Bearer ${token}` }
+            }).then(response => {
+                this.saveProducts(response.data);
+                return response.data;
+            })
+        );
+    }
+    
+    saveProducts(products: ProductItemCart[]): void {        
         localStorage.setItem("products", JSON.stringify(products));
     }
 }
